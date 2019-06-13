@@ -195,7 +195,7 @@ def create_training_instances(input_files, tokenizer, max_seq_length,
         if not line:
           break
         line = line.strip()
-
+        
         # Empty lines are used as document delimiters
         if not line:
           all_documents.append([])
@@ -440,8 +440,10 @@ def main(_):
       vocab_file=FLAGS.vocab_file, do_lower_case=FLAGS.do_lower_case)
 
   input_files = []
+  #for input_pattern in FLAGS.input_file.split(","):
+  #  input_files.extend(tf.gfile.Glob(input_pattern))
   for input_pattern in FLAGS.input_file.split(","):
-    input_files.extend(tf.gfile.Glob(input_pattern))
+    input_files.append(input_pattern)
 
   tf.logging.info("*** Reading from input files ***")
   for input_file in input_files:
