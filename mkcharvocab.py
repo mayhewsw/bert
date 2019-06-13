@@ -6,17 +6,14 @@ import os
 
 INPUT_PATH = sys.argv[1]
 OUTPUT_PATH = sys.argv[2]
-MODEL_PREFIX = "tokenizer"
-VOC_SIZE = 165
-SUBSAMPLE_SIZE = 12800000
-NUM_PLACEHOLDERS = 5
+NUM_PLACEHOLDERS = 100
 
 assert os.path.exists(OUTPUT_PATH)
 
 voc = set()
 with open(INPUT_PATH) as f:
     for i,line in enumerate(f):
-        if i%10000 == 0:
+        if i%50000 == 0:
             print(i)
         for c in line.decode("utf8").strip():
             voc.add(c)
@@ -24,12 +21,14 @@ with open(INPUT_PATH) as f:
 
 bert_vocab = list(voc)
 
+VOCAB_SIZE = len(bert_vocab)
+
 ctrl_symbols = ["[PAD]","[UNK]","[CLS]","[SEP]","[MASK]"]
 bert_vocab = ctrl_symbols + bert_vocab
 bert_vocab += ["[UNUSED_{}]".format(i) for i in range(VOC_SIZE - len(bert_vocab))]
 print("Vocab size", len(bert_vocab))
 
-VOC_FNAME = "vocab.txt" #@param {type:"string"}
+VOC_FNAME = "vocab.txt"
 
 bert_base_config = {
     "attention_probs_dropout_prob": 0.1, 

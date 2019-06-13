@@ -1,9 +1,9 @@
 set -e
 
-export BERT_BASE_DIR=/nlp/data/mayhew/bert_stuff/uig
+export BERT_BASE_DIR=/nlp/data/mayhew/bert_stuff/uzug
 SHARD_DIR=$BERT_BASE_DIR/shards
 
-PRC_DATA_FPATH=/nlp/data/mayhew/bert_stuff/uig.txt
+PRC_DATA_FPATH=/nlp/data/mayhew/bert_stuff/uzug-shuf.txt
 
 mkdir -p $SHARD_DIR
 split -a 4 -l 25000 -d $PRC_DATA_FPATH $SHARD_DIR/shard_
