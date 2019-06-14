@@ -9,7 +9,8 @@ python run_pretraining.py \
        --bert_config_file=$B/bert_config.json \
        --train_batch_size=32 \
        --max_seq_length=128 \
-       --use_tpu = True \
+       --use_tpu=True \
+       --tpu_name=bert-trainer \
        --max_predictions_per_seq=20 \
        --num_train_steps=10000 \
        --num_warmup_steps=10 \

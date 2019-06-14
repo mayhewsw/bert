@@ -5,4 +5,8 @@
 INPUT=$1
 OUTPUT=$2
 
-cat $INPUT | awk '!NF{$0="@@DOCSEP@@"}1' | awk '$1=$1' ORS='@@NEWLINE@@' | sed 's/@@DOCSEP@@@@NEWLINE@@/\n/g' | shuf | sed 's/@@NEWLINE@@/\n/g' > $OUTPUT
+F=/tmp/shuf_${RANDOM}
+cat $INPUT | awk '!NF{$0="@@DOCSEP@@"}1' | awk '$1=$1' ORS='@@NEWLINE@@' > $F
+cat ${F} | sed 's/@@DOCSEP@@@@NEWLINE@@/\n/g' | shuf > ${F}.1
+
+cat ${F}.1 | sed 's/@@NEWLINE@@/\n/g' > $OUTPUT

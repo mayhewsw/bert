@@ -21,7 +21,7 @@ with open(INPUT_PATH) as f:
 
 bert_vocab = list(voc)
 
-VOCAB_SIZE = len(bert_vocab)
+VOC_SIZE = len(bert_vocab)
 
 ctrl_symbols = ["[PAD]","[UNK]","[CLS]","[SEP]","[MASK]"]
 bert_vocab = ctrl_symbols + bert_vocab
