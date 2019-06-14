@@ -12,9 +12,9 @@ python run_pretraining.py \
        --use_tpu=True \
        --tpu_name=bert-trainer \
        --max_predictions_per_seq=20 \
-       --num_train_steps=10000 \
+       --num_train_steps=5000000 \
        --num_warmup_steps=10 \
-       --learning_rate=2e-5 >& $B/pretraining_output/log.txt 
+       --learning_rate=2e-5 2>&1 | tee log.txt
 
 
 #--init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
