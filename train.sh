@@ -14,7 +14,7 @@ python run_pretraining.py \
        --max_predictions_per_seq=20 \
        --num_train_steps=10000 \
        --num_warmup_steps=10 \
-       --learning_rate=2e-5
+       --learning_rate=2e-5 >& $B/pretraining_output/log.txt 
 
 
 #--init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
