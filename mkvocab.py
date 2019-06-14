@@ -1,26 +1,25 @@
 import sentencepiece as spm
 import random
 import tokenization
+import os
+import sys
 
-fname = sys.argv[1]
+filedir = sys.argv[1]
+outvocab = sys.argv[2]
 
 MODEL_PREFIX = "sentpiece"
-VOC_SIZE = 1500
-SUBSAMPLE_SIZE = 128000
+VOC_SIZE = 30000
 NUM_PLACEHOLDERS = 256
 
-tokenizer = tokenization.BasicTokenizer(do_lower_case=False)
-outfname = fname + ".tmp"
-with open(fname) as f, open(outfname, "w") as out:
-    for line in f:
-        outline = " ".join(tokenizer.tokenize(line)) 
-        out.write(outline + "\n")
-        
+fnames = filter(lambda f: f.endswith(".tok"), os.listdir(filedir))
+fnames = list(map(lambda f: os.path.join(filedir, f), fnames))
+comma_sep_fnames = ",".join(fnames)
+
 SPM_COMMAND = ('--input={} --model_prefix={} --normalization_rule_name=identity '
-               '--vocab_size={} '
+               '--vocab_size={} --num_threads=24 --input_sentence_size=2000000 '
                '--shuffle_input_sentence=true --model_type=unigram '
                '--bos_id=-1 --eos_id=-1').format(
-    outfname, MODEL_PREFIX,
+    comma_sep_fnames, MODEL_PREFIX,
     VOC_SIZE - NUM_PLACEHOLDERS)
 
 spm.SentencePieceTrainer.Train(SPM_COMMAND)
@@ -53,9 +52,9 @@ bert_vocab = ctrl_symbols + bert_vocab
 bert_vocab += ["[UNUSED_{}]".format(i) for i in range(VOC_SIZE - len(bert_vocab))]
 print(len(bert_vocab))
 
-VOC_FNAME = "vocab.txt"
-
-with open(VOC_FNAME, "w") as fo:
+with open(outvocab, "w") as fo:
     for token in bert_vocab:
         fo.write(token+"\n")
 
+print("Write to", outvocab)
+        
