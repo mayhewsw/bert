@@ -1,6 +1,10 @@
 # This script takes two arguments:
-#  INPUT: a text file with one sentence per line, and blank lines indicating new documents
+#  INPUT: BERT input format, a text file with one sentence per line, and blank lines indicating new documents
 #  OUTPUT: a text file with document structure intact (with a document, the sentences have the same order), but documents shuffled.
+
+# WARNING: this requires a lot of memory, so best to run on a qlogin node.
+
+# TODO: write as qsub job.
 
 INPUT=$1
 OUTPUT=$2

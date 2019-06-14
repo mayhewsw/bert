@@ -4,6 +4,9 @@ import json
 #import tqdm
 import os
 
+# This file creates a character based vocabulary
+# 
+
 INPUT_PATH = sys.argv[1]
 OUTPUT_PATH = sys.argv[2]
 NUM_PLACEHOLDERS = 100
