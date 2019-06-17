@@ -8,6 +8,8 @@ SHARD_DIR=$BERT_BASE_DIR/shards
 # Run this script on the nlpgrid
 mkdir -p $BERT_BASE_DIR/data
 
+rm -rf $SHARD_DIR/*.tok
+
 for f in $SHARD_DIR/*;
 do
     # convert each shard to tf_record in a massively parallel computation

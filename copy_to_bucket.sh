@@ -1,4 +1,6 @@
 
+# Be sure to run gcloud init
+
 GC_SDK=/mnt/castor/seas_home/m/mayhew/IdeaProjects/google-cloud-sdk/
 
-$GC_SDK/bin/gsutil cp -r $1 gs://uig_bert
+$GC_SDK/bin/gsutil cp -r $1 gs://uig_bert_wp
